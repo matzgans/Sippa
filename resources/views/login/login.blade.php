@@ -50,7 +50,7 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="/register">Already have an account? Login!</a>
+                                <a class="small" href="/register">jika tida memiliki akun, silahkan daftar</a>
                             </div>
                         </div>
                     </div>

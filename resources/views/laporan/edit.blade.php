@@ -27,16 +27,16 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                    <form action="/store/laporan" method="post" enctype="multipart/form-data" class="row g-3">
+                    <form action="/update/laporan/{{ $data->id }}" method="post" enctype="multipart/form-data" class="row g-3">
                         @csrf
                         <div class="col-md-8">
                             <label for="exampleInputEmail1" class="form-label">Nama Pelapor</label>
-                            <input type="text" name="nama" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="text" name="nama" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->nama }}">
                         </div>
                         <div class="col-md-4">
                             <label for="exampleInputEmail1" class="form-label">Pendamping</label>
                             <select class="form-select" name="pendamping_id" aria-label="Default select example">
-                                <option selected>Pendamping</option>
+                                <option selected>{{$data->pendamping->nama}}</option>
                                 @foreach($pendamping as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
@@ -45,7 +45,7 @@
                         <div class="col-md-4">
                             <label for="exampleInputEmail1" class="form-label">Jenis Laporan</label>
                             <select class="form-select" name="category_laporan_id" aria-label="Default select example">
-                                <option selected>Jenis Laporan</option>
+                                <option selected>{{$data->category_laporan->jenis_laporan}}</option>
                                 @foreach($category as $item)
                                 <option value="{{ $item->id }}">{{ $item->jenis_laporan }}</option>
                                 @endforeach
@@ -54,7 +54,7 @@
                         <div class="col-md-4">
                             <label for="exampleInputEmail1" class="form-label">Kecamatan</label>
                             <select class="form-select" name="kecamatan_id" aria-label="Default select example">
-                                <option selected>Kecamatan</option>
+                                <option selected>{{$data->kecamatan->nama}}</option>
                                 @foreach($kecamatan as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
@@ -65,7 +65,10 @@
                             <input type="date" name="created_at" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                         <div class="col-12 mb-3">
+                            <div class="col-auto">
                             <label for="exampleInputEmail1" class="form-label">Foto</label>
+                            </div>
+                            <img src="{{ asset('tambahfoto/'.$data->foto) }}" style="width:50px">
                             <input type="file" name="foto" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                         <div class="col-auto">

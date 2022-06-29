@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Models\{Laporan, Pendamping, Kecamatan, Category_laporan, Layanan};
+
 
 class LoginController extends Controller
 {
@@ -43,4 +45,22 @@ class LoginController extends Controller
         Auth::logout();
         return redirect('/login');
     }
+
+    public function dashboard()
+    {
+        $jum_laporan = Laporan::count();
+        $jum_pendamping = Pendamping::count();
+        $kecamatan = Kecamatan::count();
+        $kecamatan_dash = Kecamatan::get();
+        $category = Category_laporan::count();
+        return view('dashboard.coba', compact('jum_laporan', 'jum_pendamping', 'kecamatan', 'category', 'kecamatan_dash'));
+    }
+
+    public function store(Request $request)
+    {
+        Layanan::create($request->all());
+        return redirect('/dashboard')->with('success', 'Laporan berhasil dilaporkan');
+    }
+
+
 }

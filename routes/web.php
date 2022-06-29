@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CategorylaporanController, PendampingController, KecamatanController, LaporanController, LoginController};
+use App\Http\Controllers\{CategorylaporanController, PendampingController, KecamatanController, LaporanController, LoginController, LayananController};
 use App\Models\{Laporan, Pendamping, Kecamatan, Category_laporan};
 
 /*
@@ -46,13 +46,23 @@ Route::group(['middleware' => ['auth', 'hakakses:admin']], function(){
     Route::get('/create/laporan', [LaporanController::class, 'create']);
     Route::post('/store/laporan', [LaporanController::class, 'store']);
     Route::get('/tampil/laporan/{id}', [LaporanController::class, 'tampil']);
-    Route::get('/hapus/laporan/{id}', [LaporanController::class, 'hapus']);
+    Route::get('/delete/laporan/{id}', [LaporanController::class, 'delete']);
+    Route::get('/edit/laporan/{id}', [LaporanController::class, 'edit']);
+    Route::post('/update/laporan/{id}', [LaporanController::class, 'update']);
 });
 
-
+Route::get('/coba', [LoginController::class, 'coba']);
 // login
 Route::get('/register', [LoginController::class, 'register']);
 Route::post('/registerproses', [LoginController::class, 'registerproses']);
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/loginproses', [LoginController::class, 'loginproses']);
 Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+Route::post('/store/dashboard', [LoginController::class, 'store']);
+
+
+Route::get('/index/layanan', [LayananController::class, 'layanan'])->name('layanan');
+Route::get('/create/layanan', [LayananController::class, 'create']);
+Route::post('/store/layanan', [LayananController::class, 'store']);
+Route::get('/delete/layanan/{id}', [LayananController::class, 'delete']);
